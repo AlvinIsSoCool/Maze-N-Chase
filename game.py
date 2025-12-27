@@ -42,7 +42,8 @@ class Game:
 				self.running = False
 
 			if event.type == pygame.KEYDOWN:
-				if event.key == pygame.K_q: self.end_game()
+				if event.key == pygame.K_q: 
+					if self.state != GameState.PLAYING: self.end_game()
 				if event.key == pygame.K_RETURN:
 					if self.state == GameState.START: self.set_state(GameState.PLAYING, True)
 					elif self.state == GameState.GAMEOVER or self.state == GameState.GAMEWON: self.ctx.restart_run()
@@ -76,21 +77,7 @@ class Game:
 			self.event_count += 1
 			#print(f"Event Count: {self.event_count}")
 
-	# TODO: Add overlay logic.
 	def update(self, dt):
-		"""if self.state == GameState.START: 
-			pass
-		elif self.state == GameState.MENU: 
-			pass
-		elif self.state == GameState.PAUSED:
-			pass
-		elif self.state == GameState.PLAYING:
-			self.ctx.update(dt)
-		elif self.state == GameState.GAMEWON:
-			pass
-		elif self.state == GameState.GAMEOVER:
-			pass"""
-
 		if self.state == GameState.PLAYING:
 			self.ctx.update(dt)
 			self.update_count += 1
@@ -133,7 +120,6 @@ class Game:
 		# Actual restarting of the game happens here.
 		pass
 
-	# TODO: Throttle or prevent updates when window loses focus.
 	def run(self):
 		while self.running:
 			self.real_dt = self.clock.tick(self.fps) / 1000
