@@ -15,7 +15,7 @@ class Maze:
 
 	def on_theme_change(self, theme):
 		self.theme = theme
-		self.dirty = True
+		self.draw_maze()
 
 	def init(self): 
 		self.grid = [[FULL for _ in range(self.cols)] for _ in range(self.rows)]
@@ -25,6 +25,7 @@ class Maze:
 		if self.dirty: 
 			screen.blit(self.surface, (0, 0))
 			self.dirty = False
+			print("Maze drawn.")
 			return True
 		return False
 

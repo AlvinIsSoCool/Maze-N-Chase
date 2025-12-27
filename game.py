@@ -23,7 +23,7 @@ class Game:
 		self.clock = pygame.time.Clock()
 		self.running = True
 		self.state = None
-		self.theme_mgr = ThemeManager(THEMES, "light")
+		self.theme_mgr = ThemeManager(THEMES, "matrix")
 		print(self.theme_mgr.theme.name)
 		self.overlay_global = GlobalOverlayHandler(pygame.Surface((settings.WIDTH + 1, settings.HEIGHT + 1), pygame.SRCALPHA).convert_alpha(), self.theme_mgr.theme)
 		self.ctx = GameContext(self, self.theme_mgr.theme)
@@ -31,7 +31,6 @@ class Game:
 		self.set_state(GameState.START)
 		self.dirty = True
 
-		# DEBUG
 		self.frame_count = 0
 		self.update_count = 0
 		self.draw_count = 0
@@ -109,11 +108,12 @@ class Game:
 			self.draw_count += 1
 			#print(f"Draw Count: {self.draw_count}")
 
-	def set_state(self, state, force=False):
-		if (state != self.state and isinstance(state, GameState)) and (force or not self.overlay_global.active):
+	def set_state(self, state, force=False, refresh=False):
+		if (state != self.state and isinstance(state, GameState)) and (force or not self.overlay_global.active) or refresh:
 			self.state = state
 			self.ctx.force_all_dirty()
 			self.overlay_global.reset()
+			print("State changed.")
 
 			if self.state == GameState.START: self.overlay_global.draw_start()
 			elif self.state == GameState.PAUSED: self.overlay_global.draw_pause_menu()
@@ -123,6 +123,7 @@ class Game:
 	def change_theme(self, theme):
 		if self.theme_mgr.set_theme(theme):
 			self.overlay_global.on_theme_change(theme)
+			self.set_state(self.state, True, True)
 			self.ctx.on_theme_change(theme)
 
 	def end_game(self):

@@ -1,4 +1,5 @@
 import pygame
+import random
 import settings
 import utils
 
@@ -22,8 +23,9 @@ class GameContext:
 		#self.maze.generate_and_draw_grid()
 
 		self.em = EntityManager(self)
-		player = Player(self, x=settings.WIDTH // 2, y=settings.HEIGHT // 2, color=self.theme.color("player"))
-		enemy = Enemy(self, x=settings.WIDTH // 2 - 20, y=settings.HEIGHT // 2 - 20, color=self.theme.color("enemy"))
+		player = Player(self, color=self.theme.color("player"))
+		enemy = Enemy(self, color=self.theme.color("enemy"))
+
 		self.em.add_all([player, enemy])
 
 		self.overlay_ctx = LocalOverlayHandler(pygame.Surface((settings.WIDTH + 1, settings.HEIGHT + 1), pygame.SRCALPHA).convert_alpha(), theme)
@@ -54,8 +56,8 @@ class GameContext:
 
 	def restart_run(self):
 		self.em.remove_all()
-		player = Player(self, x=settings.WIDTH // 2, y=settings.HEIGHT // 2, color=self.theme.color("player"))
-		enemy = Enemy(self, x=settings.WIDTH // 2 - 20, y=settings.HEIGHT // 2 - 20, color=self.theme.color("enemy"))
+		player = Player(self, color=self.theme.color("player"))
+		enemy = Enemy(self, color=self.theme.color("enemy"))
 
 		self.game.set_state(GameState.PLAYING, True)
 		self.maze.generate_and_draw_maze_dfs()

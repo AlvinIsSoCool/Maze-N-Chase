@@ -1,11 +1,14 @@
 import pygame
 import random
+import settings
 
 from .entity import Entity
 from constants import EntityType, TOP, LEFT, BOTTOM, RIGHT, OPPOSITE, DIR_MASK
 
 class Enemy(Entity):
-	def __init__(self, ctx, x=100, y=100, speed=150, size=8, color=(0, 0, 0)):
+	def __init__(self, ctx, x=None, y=None, speed=150, size=8, color=(0, 0, 0)):
+		x = random.randint(0, settings.WIDTH - size)
+		y = random.randint(0, settings.HEIGHT - size)
 		self.type = EntityType.ENEMY
 		self.direction = random.choice([TOP, LEFT, BOTTOM, RIGHT])
 		self.blocked_wall = None

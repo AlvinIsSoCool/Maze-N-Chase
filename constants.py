@@ -6,9 +6,8 @@ class EntityType(Enum):
 
 class GameState(Enum):
 	START = auto()
-	MENU = auto()
-	PAUSED = auto()
 	PLAYING = auto()
+	PAUSED = auto()
 	GAMEWON = auto()
 	GAMEOVER = auto()
 

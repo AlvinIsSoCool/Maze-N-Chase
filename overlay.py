@@ -14,7 +14,6 @@ class OverlayHandler:
 		self.surface.fill((0, 0, 0, 0))
 		self.dirty = True
 		self.active = False
-		print("Overlay Reset Complete!")
 
 	def on_state_change(self):
 		self.dirty = True
@@ -28,7 +27,6 @@ class OverlayHandler:
 		if self.dirty: 
 			screen.blit(self.surface, (0, 0))
 			self.dirty = False
-			print("Overlay Draw Complete!")
 			return True
 		return False
 
@@ -40,41 +38,62 @@ class GlobalOverlayHandler(OverlayHandler):
 		self.surface.fill(self.theme.color("start_screen"))
 
 		text1 = self.theme.font("large").render("Maze N' Chase", True, self.theme.color("start_text"))
-		text2 = self.theme.font("small").render("Press ENTER to continue...", True, self.theme.color("start_text"))
+		text2 = self.theme.font("medium").render("Press ENTER to start", True, self.theme.color("start_text"))
+		text3 = self.theme.font("medium").render("Press Q to quit", True, self.theme.color("start_text"))
 
-		rect1 = text1.get_rect(center=(settings.WIDTH // 2, 100))
+		rect1 = text1.get_rect(center=(settings.WIDTH // 2, 120))
 		rect2 = text2.get_rect(center=(settings.WIDTH // 2, 250))
+		rect3 = text3.get_rect(center=(settings.WIDTH // 2, 278))
 
 		self.surface.blit(text1, rect1)
 		self.surface.blit(text2, rect2)
+		self.surface.blit(text3, rect3)
 		self.on_state_change()
 
 	def draw_pause_menu(self):
 		self.surface.fill(self.theme.color("pause_screen"))
+
+		text1 = self.theme.font("large").render("GAME PAUSED", True, self.theme.color("accent_text"))
+		text2 = self.theme.font("medium").render("Press ESC to continue", True, self.theme.color("accent_text"))
+		text3 = self.theme.font("medium").render("Press Q to quit", True, self.theme.color("accent_text"))
+
+		rect1 = text1.get_rect(center=(settings.WIDTH // 2, 120))
+		rect2 = text2.get_rect(center=(settings.WIDTH // 2, 250))
+		rect3 = text3.get_rect(center=(settings.WIDTH // 2, 278))
+
+		self.surface.blit(text1, rect1)
+		self.surface.blit(text2, rect2)
+		self.surface.blit(text3, rect3)
 		self.on_state_change()
 
 	def draw_game_over(self):
 		self.surface.fill(self.theme.color("gameover_screen"))
 		text1 = self.theme.font("large").render("GAME OVER!", True, self.theme.color("accent_text"))
-		text2 = self.theme.font("small").render("Press ENTER to respawn...", True, self.theme.color("accent_text"))
+		text2 = self.theme.font("medium").render("Press ENTER to respawn", True, self.theme.color("accent_text"))
+		text3 = self.theme.font("medium").render("Press Q to quit", True, self.theme.color("accent_text"))
 
-		rect1 = text1.get_rect(center=(settings.WIDTH // 2, 150))
-		rect2 = text2.get_rect(center=(settings.WIDTH // 2, 300))
+		rect1 = text1.get_rect(center=(settings.WIDTH // 2, 120))
+		rect2 = text2.get_rect(center=(settings.WIDTH // 2, 250))
+		rect3 = text3.get_rect(center=(settings.WIDTH // 2, 278))
 
 		self.surface.blit(text1, rect1)
 		self.surface.blit(text2, rect2)
+		self.surface.blit(text3, rect3)
 		self.on_state_change()
 
 	def draw_game_won(self):
 		self.surface.fill(self.theme.color("gamewon_screen"))
 		text1 = self.theme.font("large").render("GAME WON!", True, self.theme.color("accent_text"))
-		text2 = self.theme.font("small").render("Press ENTER to restart...", True, self.theme.color("accent_text"))
+		text2 = self.theme.font("medium").render("Press ENTER to respawn", True, self.theme.color("accent_text"))
+		text3 = self.theme.font("medium").render("Press Q to quit", True, self.theme.color("accent_text"))
 
-		rect1 = text1.get_rect(center=(settings.WIDTH // 2, 150))
-		rect2 = text2.get_rect(center=(settings.WIDTH // 2, 300))
+		rect1 = text1.get_rect(center=(settings.WIDTH // 2, 120))
+		rect2 = text2.get_rect(center=(settings.WIDTH // 2, 250))
+		rect3 = text3.get_rect(center=(settings.WIDTH // 2, 278))
 
 		self.surface.blit(text1, rect1)
 		self.surface.blit(text2, rect2)
+		self.surface.blit(text3, rect3)
 		self.on_state_change()
 
 class LocalOverlayHandler(OverlayHandler):

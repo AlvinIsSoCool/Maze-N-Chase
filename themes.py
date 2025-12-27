@@ -14,11 +14,10 @@ class Theme:
 
 	def font(self, key):
 		if key not in self._fonts:
-			#path, size, bold, italic = self.font_defs[key]
-			path, size = self.font_defs[key]
+			path, size, bold, italic = self.font_defs[key]
 			font = pygame.font.Font(path, size)
-			#font.set_bold(bold)
-			#font.set_italic(italic)
+			font.set_bold(bold)
+			font.set_italic(italic)
 			self._fonts[key] = font
 		return self._fonts[key]
 
@@ -34,13 +33,13 @@ DARK_THEME = Theme(
 		"gameover_screen": (255, 0, 0, 150),
 		"gamewon_screen": (0, 255, 0, 150),
 		"start_text": (255, 255, 255),
-		"accent_text": (255, 255, 255),
+		"accent_text": (0, 0, 0),
 		"coordinates_text": (0, 0, 255)
 	},
 	fonts = {
-		"large": (None, 64),
-		"medium": (None, 32),
-		"small": (None, 20)
+		"large": (None, 70, False, False),
+		"medium": (None, 30, False, False),
+		"small": (None, 20, False, False)
 	}
 )
 
@@ -60,9 +59,9 @@ LIGHT_THEME = Theme(
 		"coordinates_text": (0, 0, 255)
 	},
 	fonts = {
-		"large": (None, 64),
-		"medium": (None, 32),
-		"small": (None, 20)
+		"large": (None, 70, False, False),
+		"medium": (None, 30, False, False),
+		"small": (None, 20, False, False)
 	}
 )
 
@@ -73,7 +72,7 @@ MATRIX_THEME = Theme(
 		"maze": (0, 255, 120),
 		"player": (0, 255, 70),
 		"enemy": (0, 0, 255),
-		"start_screen": (0, 0, 0, 0),
+		"start_screen": (0, 0, 0, 255),
 		"pause_screen": (0, 0, 0, 100),
 		"gameover_screen": (255, 0, 0, 150),
 		"gamewon_screen": (0, 255, 0, 150),
@@ -82,31 +81,31 @@ MATRIX_THEME = Theme(
 		"coordinates_text": (0, 0, 255)
 	},
 	fonts = {
-		"large": (None, 64),
-		"medium": (None, 32),
-		"small": (None, 20)
+		"large": (None, 70, False, False),
+		"medium": (None, 30, False, False),
+		"small": (None, 20, False, False)
 	}
 )
 
 HORROR_THEME = Theme(
 	name = "horror",
 	colors = {
-		"background": (145, 5, 5),
+		"background": (150, 5, 5),
 		"maze": (255, 0, 0),
 		"player": (0, 0, 0),
 		"enemy": (50, 0, 80),
-		"start_screen": (0, 0, 0, 0),
+		"start_screen": (255, 0, 0, 255),
 		"pause_screen": (0, 0, 0, 100),
 		"gameover_screen": (255, 0, 0, 150),
 		"gamewon_screen": (0, 255, 0, 150),
-		"start_text": (255, 255, 255),
-		"accent_text": (255, 255, 255),
+		"start_text": (0, 0, 0),
+		"accent_text": (0, 0, 0),
 		"coordinates_text": (0, 0, 255)
 	},
 	fonts = {
-		"large": (None, 64),
-		"medium": (None, 32),
-		"small": (None, 20)
+		"large": (None, 70, False, False),
+		"medium": (None, 30, False, False),
+		"small": (None, 20, False, False)
 	}
 )
 
