@@ -23,7 +23,7 @@ class Game:
 		self.clock = pygame.time.Clock()
 		self.running = True
 		self.state = None
-		self.theme_mgr = ThemeManager(THEMES, "matrix")
+		self.theme_mgr = ThemeManager(THEMES, "horror")
 		print(self.theme_mgr.theme.name)
 		self.overlay_global = GlobalOverlayHandler(pygame.Surface((settings.WIDTH + 1, settings.HEIGHT + 1), pygame.SRCALPHA).convert_alpha(), self.theme_mgr.theme)
 		self.ctx = GameContext(self, self.theme_mgr.theme)

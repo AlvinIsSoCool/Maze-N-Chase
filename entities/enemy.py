@@ -20,7 +20,7 @@ class Enemy(Entity):
 		if self.alive:
 			if self.direction is None or self.collided: 
 				self.choose_new_direction()
-				print(f"New Direction Chosen! Blocked Wall: {self.blocked_wall}, Direction: {self.direction}, Collided: {self.collided}")
+				#print(f"New Direction Chosen! Blocked Wall: {self.blocked_wall}, Direction: {self.direction}, Collided: {self.collided}")
 				self.collided = False
 
 			direction = pygame.Vector2(0, 0)

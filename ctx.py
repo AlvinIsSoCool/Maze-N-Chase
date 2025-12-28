@@ -49,10 +49,10 @@ class GameContext:
 		return dirty
 
 	def end_run(self):
-		self.game.set_state(GameState.GAMEOVER)
+		self.game.set_state(GameState.GAME_OVER)
 
 	def win_run(self):
-		self.game.set_state(GameState.GAMEWON)
+		self.game.set_state(GameState.GAME_WIN)
 
 	def restart_run(self):
 		self.em.remove_all()

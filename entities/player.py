@@ -25,6 +25,7 @@ class Player(Entity):
 			if direction.length_squared() == 0: return
 
 			movement = direction * (self.speed * dt)
+			print(f"Movement: {movement}")
 			self.pos += movement
 
 	def damage(self):
