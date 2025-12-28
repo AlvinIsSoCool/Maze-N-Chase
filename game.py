@@ -46,7 +46,7 @@ class Game:
 					if self.state != GameState.PLAYING: self.end_game()
 				if event.key == pygame.K_RETURN:
 					if self.state == GameState.START: self.set_state(GameState.PLAYING, True)
-					elif self.state == GameState.GAMEOVER or self.state == GameState.GAMEWON: self.ctx.restart_run()
+					elif self.state == GameState.GAME_OVER or self.state == GameState.GAME_WIN: self.ctx.restart_run()
 				if event.key == pygame.K_ESCAPE:
 					if self.state == GameState.PLAYING: self.set_state(GameState.PAUSED, True)
 					elif self.state == GameState.PAUSED: self.set_state(GameState.PLAYING, True)
@@ -104,8 +104,8 @@ class Game:
 
 			if self.state == GameState.START: self.overlay_global.draw_start()
 			elif self.state == GameState.PAUSED: self.overlay_global.draw_pause_menu()
-			elif self.state == GameState.GAMEOVER: self.overlay_global.draw_game_over()
-			elif self.state == GameState.GAMEWON: self.overlay_global.draw_game_won()
+			elif self.state == GameState.GAME_OVER: self.overlay_global.draw_game_over()
+			elif self.state == GameState.GAME_WIN: self.overlay_global.draw_game_won()
 
 	def change_theme(self, theme):
 		if self.theme_mgr.set_theme(theme):

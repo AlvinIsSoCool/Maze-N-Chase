@@ -35,11 +35,11 @@ class GlobalOverlayHandler(OverlayHandler):
 		super().__init__(surface, theme)
 
 	def draw_start(self):
-		self.surface.fill(self.theme.color("start_screen"))
+		self.surface.fill(self.theme.color("overlay_start"))
 
-		text1 = self.theme.font("large").render("Maze N' Chase", True, self.theme.color("start_text"))
-		text2 = self.theme.font("medium").render("Press ENTER to start", True, self.theme.color("start_text"))
-		text3 = self.theme.font("medium").render("Press Q to quit", True, self.theme.color("start_text"))
+		text1 = self.theme.font("large").render("Maze N' Chase", True, self.theme.color("text_primary"))
+		text2 = self.theme.font("medium").render("Press ENTER to start", True, self.theme.color("text_secondary"))
+		text3 = self.theme.font("medium").render("Press Q to quit", True, self.theme.color("text_secondary"))
 
 		rect1 = text1.get_rect(center=(settings.WIDTH // 2, 120))
 		rect2 = text2.get_rect(center=(settings.WIDTH // 2, 250))
@@ -51,11 +51,11 @@ class GlobalOverlayHandler(OverlayHandler):
 		self.on_state_change()
 
 	def draw_pause_menu(self):
-		self.surface.fill(self.theme.color("pause_screen"))
+		self.surface.fill(self.theme.color("overlay_pause"))
 
-		text1 = self.theme.font("large").render("GAME PAUSED", True, self.theme.color("accent_text"))
-		text2 = self.theme.font("medium").render("Press ESC to continue", True, self.theme.color("accent_text"))
-		text3 = self.theme.font("medium").render("Press Q to quit", True, self.theme.color("accent_text"))
+		text1 = self.theme.font("large").render("GAME PAUSED", True, self.theme.color("text_primary"))
+		text2 = self.theme.font("medium").render("Press ESC to continue", True, self.theme.color("text_secondary"))
+		text3 = self.theme.font("medium").render("Press Q to quit", True, self.theme.color("text_secondary"))
 
 		rect1 = text1.get_rect(center=(settings.WIDTH // 2, 120))
 		rect2 = text2.get_rect(center=(settings.WIDTH // 2, 250))
@@ -67,10 +67,10 @@ class GlobalOverlayHandler(OverlayHandler):
 		self.on_state_change()
 
 	def draw_game_over(self):
-		self.surface.fill(self.theme.color("gameover_screen"))
-		text1 = self.theme.font("large").render("GAME OVER!", True, self.theme.color("accent_text"))
-		text2 = self.theme.font("medium").render("Press ENTER to respawn", True, self.theme.color("accent_text"))
-		text3 = self.theme.font("medium").render("Press Q to quit", True, self.theme.color("accent_text"))
+		self.surface.fill(self.theme.color("overlay_game_over"))
+		text1 = self.theme.font("large").render("GAME OVER!", True, self.theme.color("text_primary"))
+		text2 = self.theme.font("medium").render("Press ENTER to respawn", True, self.theme.color("text_secondary"))
+		text3 = self.theme.font("medium").render("Press Q to quit", True, self.theme.color("text_secondary"))
 
 		rect1 = text1.get_rect(center=(settings.WIDTH // 2, 120))
 		rect2 = text2.get_rect(center=(settings.WIDTH // 2, 250))
@@ -82,10 +82,10 @@ class GlobalOverlayHandler(OverlayHandler):
 		self.on_state_change()
 
 	def draw_game_won(self):
-		self.surface.fill(self.theme.color("gamewon_screen"))
-		text1 = self.theme.font("large").render("GAME WON!", True, self.theme.color("accent_text"))
-		text2 = self.theme.font("medium").render("Press ENTER to respawn", True, self.theme.color("accent_text"))
-		text3 = self.theme.font("medium").render("Press Q to quit", True, self.theme.color("accent_text"))
+		self.surface.fill(self.theme.color("overlay_game_win"))
+		text1 = self.theme.font("large").render("GAME WON!", True, self.theme.color("text_primary"))
+		text2 = self.theme.font("medium").render("Press ENTER to respawn", True, self.theme.color("text_secondary"))
+		text3 = self.theme.font("medium").render("Press Q to quit", True, self.theme.color("text_secondary"))
 
 		rect1 = text1.get_rect(center=(settings.WIDTH // 2, 120))
 		rect2 = text2.get_rect(center=(settings.WIDTH // 2, 250))
@@ -106,8 +106,8 @@ class LocalOverlayHandler(OverlayHandler):
 		p, x = em.get_player(), em.get_enemy()
 		px, py = p.rect.topleft
 		xx, xy = x.rect.topleft
-		text1 = self.theme.font("small").render(f"Player1 -> X: {px}, Y: {py}", True, self.theme.color("coordinates_text"))
-		text2 = self.theme.font("small").render(f"Enemy1 -> X: {xx}, Y: {xy}", True, self.theme.color("coordinates_text"))
+		text1 = self.theme.font("small").render(f"Player1 -> X: {px}, Y: {py}", True, self.theme.color("text_secondary"))
+		text2 = self.theme.font("small").render(f"Enemy1 -> X: {xx}, Y: {xy}", True, self.theme.color("text_secondary"))
 		rect1 = text1.get_rect(topleft=(5, 5))
 		rect2 = text2.get_rect(topleft=(5, 25))
 

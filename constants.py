@@ -8,8 +8,8 @@ class GameState(Enum):
 	START = auto()
 	PLAYING = auto()
 	PAUSED = auto()
-	GAMEWON = auto()
-	GAMEOVER = auto()
+	GAME_WIN = auto()
+	GAME_OVER = auto()
 
 TOP = 1 << 0
 LEFT = 1 << 1
