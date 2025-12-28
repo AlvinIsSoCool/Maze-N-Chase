@@ -13,20 +13,33 @@ class Player(Entity):
 		super().__init__(ctx, self.type, x, y, speed, size, color)
 
 	def update(self, dt):
-		if self.alive:
-			keys = pygame.key.get_pressed()
-			direction = pygame.Vector2(0, 0)
+		if not self.alive:
+			return
 
-			if keys[pygame.K_d] or keys[pygame.K_RIGHT]: direction.update(1, 0)
-			elif keys[pygame.K_a] or keys[pygame.K_LEFT]: direction.update(-1, 0)
-			elif keys[pygame.K_s] or keys[pygame.K_DOWN]: direction.update(0, 1)
-			elif keys[pygame.K_w] or keys[pygame.K_UP]: direction.update(0, -1)
+		keys = pygame.key.get_pressed()
+		dx = dy = 0
 
-			if direction.length_squared() == 0: return
+		if keys[pygame.K_d] or keys[pygame.K_RIGHT]:
+			dx = 1
+		elif keys[pygame.K_a] or keys[pygame.K_LEFT]:
+			dx = -1
+		elif keys[pygame.K_s] or keys[pygame.K_DOWN]:
+			dy = 1
+		elif keys[pygame.K_w] or keys[pygame.K_UP]:
+			dy = -1
 
-			movement = direction * (self.speed * dt)
-			print(f"Movement: {movement}")
-			self.pos += movement
+		if dx == 0 and dy == 0:
+			return
+
+		move = self.speed * dt
+		self.old_rect = self.rect.copy()
+		self.rect.x += dx * move
+		self.rect.y += dy * move
+		
+		CollisionHandler.handle_collisions_maze(maze, self)
+
+		if self.rect.topleft != self.old_rect.topleft:
+			self.set_dirty()
 
 	def damage(self):
 		super().damage()

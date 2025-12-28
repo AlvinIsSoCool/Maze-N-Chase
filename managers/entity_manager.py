@@ -33,7 +33,6 @@ class EntityManager:
 	def update(self, dt):
 		for e in self.entities:
 			e.update(dt)
-			CollisionHandler.update(self.ctx.maze, e)
 
 		self.handle_entity_collisions()
 		self.handle_player_win()
@@ -42,9 +41,12 @@ class EntityManager:
 	def handle_entity_collisions(self):
 		if not settings.NOCLIP:
 			for p in self.players:
-				if not p.alive: continue
+				if not p.alive: 
+					continue
+
 				for x in self.enemies:
-					if not x.alive: continue
+					if not x.alive: 
+						continue
 					if p.rect.colliderect(x.rect):
 						print(f"P-E Collision Detected!")
 						self.resolve_entity_damage(p, x)

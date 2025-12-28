@@ -17,29 +17,43 @@ class Enemy(Entity):
 		super().__init__(ctx, self.type, x, y, speed, size, color)
 
 	def update(self, dt):
-		if self.alive:
-			if self.direction is None or self.collided: 
-				self.choose_new_direction()
-				#print(f"New Direction Chosen! Blocked Wall: {self.blocked_wall}, Direction: {self.direction}, Collided: {self.collided}")
-				self.collided = False
+		if not self.alive:
+			return
 
-			direction = pygame.Vector2(0, 0)
-			direction.update(DIR_MASK[self.direction])
+		if self.direction is None or self.collided:
+			self.choose_new_direction()
+			self.collided = False
 
-			if direction.length_squared() == 0: return
+		dx, dy = DIR_MASK[self.direction]
 
-			movement = direction * (self.speed * dt)
-			self.pos += movement
+		if dx == 0 and dy == 0:
+			return
+
+		move = self.speed * dt
+		self.old_rect = self.rect.copy()
+
+		if dx != 0: 
+			self.rect.x += dx * move
+		elif dy != 0: 
+			self.rect.y += dy * move
+
+		CollisionHandler.handle_collisions_maze(self.ctx.maze, self)
+
+		if self.rect.topleft != self.old_rect.topleft: 
+			self.set_dirty()
 
 	def choose_new_direction(self):
 		available = []
 
 		for direction in (TOP, LEFT, BOTTOM, RIGHT):
-			if self.blocked_wall & direction: continue
-			if direction == OPPOSITE[self.direction]: continue
+			if self.blocked_wall & direction: 
+				continue
+			if direction == OPPOSITE[self.direction]: 
+				continue
 			available.append(direction)
 
-		if not available: available = [OPPOSITE[self.direction]]
+		if not available: 
+			available = [OPPOSITE[self.direction]]
 		self.direction = random.choice(available)
 
 	def set_collided(self, blocked_wall):

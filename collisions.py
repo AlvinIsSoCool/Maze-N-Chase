@@ -3,52 +3,50 @@ from constants import TOP, LEFT, BOTTOM, RIGHT
 
 class CollisionHandler:
 	@staticmethod
-	def update(maze, e):
-		CollisionHandler.handle_collisions_maze(maze, e)
-
-	@staticmethod
 	def handle_collisions_maze(maze, e):
-		if not settings.NOCLIP:
-			tile = maze.tile
-			grid = maze.grid
-			rows = maze.rows
-			cols = maze.cols
+		if settings.NOCLIP:
+			return
 
-			hs = e.size / 2
-			ex, ey = e.pos.x, e.pos.y
-			cx, cy = ex + hs, ey + hs
-			r, c = int(cy // tile), int(cx // tile)
-			pad = 1
+		tile = maze.tile
+		grid = maze.grid
+		rows = maze.rows
+		cols = maze.cols
 
-			if 0 <= r < rows and 0 <= c < cols:
-				cell = grid[r][c]
-				cell_x = c * tile
-				cell_y = r * tile
+		cx, cy = e.rect.center
+		r, c = int(cy // tile), int(cx // tile)
 
-				if cell & TOP:
-					min_y = cell_y + pad
-					if ey < min_y:
-						e.pos.y = min_y + pad
-						e.set_collided(TOP)
+		if not (0 <= r < rows and 0 <= c < cols):
+			return
 
-				if cell & BOTTOM:
-					max_y = cell_y + tile - pad
-					if ey + e.size > max_y:
-						e.pos.y = max_y - e.size
-						e.set_collided(BOTTOM)
+		cell = grid[r][c]
+		cell_x = c * tile
+		cell_y = r * tile
 
-				if cell & LEFT:
-					min_x = cell_x + pad
-					if ex < min_x:
-						e.pos.x = min_x + pad
-						e.set_collided(LEFT)
+		dx = e.rect.x - e.old_rect.x
+		dy = e.rect.y - e.old_rect.y
 
-				if cell & RIGHT:
-					max_x = cell_x + tile - pad
-					if ex + e.size > max_x:
-						e.pos.x = max_x - e.size
-						e.set_collided(RIGHT)
+		if dx != 0:
+			if dx > 0 and (cell & RIGHT):
+				wall_x = cell_x + tile
+				if e.rect.right > wall_x:
+					e.rect.right = wall_x
+					e.set_collided(RIGHT)
 
-		e.old_rect = e.rect.copy()
-		e.rect.topleft = e.pos
-		if e.old_rect.topleft != e.rect.topleft: e.set_dirty()
+			elif dx < 0 and (cell & LEFT):
+				wall_x = cell_x
+				if e.rect.left < wall_x:
+					e.rect.left = wall_x
+					e.set_collided(LEFT)
+
+		if dy != 0:
+			if dy > 0 and (cell & BOTTOM):
+				wall_y = cell_y + tile
+				if e.rect.bottom > wall_y:
+					e.rect.bottom = wall_y
+					e.set_collided(BOTTOM)
+
+			elif dy < 0 and (cell & TOP):
+				wall_y = cell_y
+				if e.rect.top < wall_y:
+					e.rect.top = wall_y
+					e.set_collided(TOP)
