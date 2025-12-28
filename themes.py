@@ -24,17 +24,18 @@ class Theme:
 DARK_THEME = Theme(
 	name = "dark",
 	colors = {
-		"background": (0, 0, 0),
-		"maze": (255, 255, 255),
-		"player": (255, 255, 255),
-		"enemy": (0, 0, 255),
-		"start_screen": (0, 0, 0, 255),
-		"pause_screen": (0, 0, 0, 100),
-		"gameover_screen": (255, 0, 0, 150),
-		"gamewon_screen": (0, 255, 0, 150),
-		"start_text": (255, 255, 255),
-		"accent_text": (0, 0, 0),
-		"coordinates_text": (0, 0, 255)
+		"background": (15, 15, 18),
+		"maze": (180, 180, 180),
+		"player": (80, 140, 255),
+		"enemy": (200, 60, 60),
+		"overlay_base": (20, 20, 22, 140),
+		"start_screen": (0, 0, 0, 120),
+		"pause_screen": (20, 30, 40, 150),
+		"gameover_screen": (90, 0, 0, 170),
+		"gamewon_screen": (0, 60, 30, 140),
+		"primary_text": (220, 220, 220),
+		"secondary_text": (160, 160, 160),
+		"disabled_text": (110, 110, 110)
 	},
 	fonts = {
 		"large": (None, 70, False, False),
@@ -46,17 +47,18 @@ DARK_THEME = Theme(
 LIGHT_THEME = Theme(
 	name = "light",
 	colors = {
-		"background": (255, 255, 255),
-		"maze": (0, 0, 0),
-		"player": (0, 0, 0),
-		"enemy": (0, 0, 255),
-		"start_screen": (255, 255, 255, 255),
-		"pause_screen": (0, 0, 0, 100),
-		"gameover_screen": (255, 0, 0, 150),
-		"gamewon_screen": (0, 255, 0, 150),
-		"start_text": (0, 0, 0),
-		"accent_text": (255, 255, 255),
-		"coordinates_text": (0, 0, 255)
+		"background": (245, 245, 245),
+		"maze": (60, 60, 60),
+		"player": (0, 120, 215),
+		"enemy": (180, 40, 40),
+		"overlay_base": (220, 220, 220, 140),
+		"start_screen": (255, 255, 255, 160),
+		"pause_screen": (210, 210, 210, 150),
+		"gameover_screen": (160, 40, 40, 160),
+		"gamewon_screen": (100, 200, 140, 140),
+		"primary_text": (30, 30, 30),
+		"secondary_text": (80, 80, 80),
+		"disabled_text": (140, 140, 140)
 	},
 	fonts = {
 		"large": (None, 70, False, False),
@@ -65,20 +67,22 @@ LIGHT_THEME = Theme(
 	}
 )
 
+
 MATRIX_THEME = Theme(
 	name = "matrix",
 	colors = {
-		"background": (0, 0, 0),
-		"maze": (0, 255, 120),
-		"player": (0, 255, 70),
-		"enemy": (0, 0, 255),
-		"start_screen": (0, 0, 0, 255),
-		"pause_screen": (0, 0, 0, 100),
-		"gameover_screen": (255, 0, 0, 150),
-		"gamewon_screen": (0, 255, 0, 150),
-		"start_text": (255, 255, 255),
-		"accent_text": (255, 255, 255),
-		"coordinates_text": (0, 0, 255)
+		"background": (5, 10, 5),
+		"maze": (0, 180, 50),
+		"player": (120, 255, 120),
+		"enemy": (0, 120, 30),
+		"overlay_base": (0, 20, 0, 160),
+		"start_screen": (0, 40, 0, 140),
+		"pause_screen": (0, 20, 0, 170),
+		"gameover_screen": (0, 10, 0, 200),
+		"gamewon_screen": (0, 80, 40, 150),
+		"primary_text": (0, 255, 70),
+		"secondary_text": (0, 180, 50),
+		"disabled_text": (0, 100, 30)
 	},
 	fonts = {
 		"large": (None, 70, False, False),
