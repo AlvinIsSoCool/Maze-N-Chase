@@ -3,15 +3,16 @@ import random
 import settings
 
 from .entity import Entity
+from collisions import CollisionHandler
 from constants import EntityType, TOP, LEFT, BOTTOM, RIGHT, OPPOSITE, DIR_MASK
 
 class Enemy(Entity):
-	def __init__(self, ctx, x=None, y=None, speed=150, size=8, color=(0, 0, 0)):
+	def __init__(self, ctx, x=0, y=0, speed=150, size=8, color=(0, 0, 0)):
 		x = random.randint(0, settings.WIDTH - size)
 		y = random.randint(0, settings.HEIGHT - size)
 		self.type = EntityType.ENEMY
 		self.direction = random.choice([TOP, LEFT, BOTTOM, RIGHT])
-		self.blocked_wall = None
+		self.blocked_wall = 0
 		self.collided = False
 
 		super().__init__(ctx, self.type, x, y, speed, size, color)
@@ -41,6 +42,8 @@ class Enemy(Entity):
 
 		if self.rect.topleft != self.old_rect.topleft: 
 			self.set_dirty()
+		else:
+			self.collided = True
 
 	def choose_new_direction(self):
 		available = []
@@ -48,13 +51,15 @@ class Enemy(Entity):
 		for direction in (TOP, LEFT, BOTTOM, RIGHT):
 			if self.blocked_wall & direction: 
 				continue
-			if direction == OPPOSITE[self.direction]: 
+			if self.direction is not None and direction == OPPOSITE[self.direction]: 
 				continue
 			available.append(direction)
 
 		if not available: 
-			available = [OPPOSITE[self.direction]]
+			available = [OPPOSITE[self.direction]] if self.direction is not None else [random.choice([TOP, LEFT, BOTTOM, RIGHT])]
+
 		self.direction = random.choice(available)
+		self.blocked_wall = 0
 
 	def set_collided(self, blocked_wall):
 		self.collided = True

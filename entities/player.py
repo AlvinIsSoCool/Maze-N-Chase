@@ -3,10 +3,11 @@ import random
 import settings
 
 from .entity import Entity
+from collisions import CollisionHandler
 from constants import EntityType
 
 class Player(Entity):
-	def __init__(self, ctx, x=None, y=None, speed=200, size=8, color=(0, 0, 0)):
+	def __init__(self, ctx, x=None, y=None, speed=500, size=8, color=(0, 0, 0)):
 		x = random.randint(0, settings.WIDTH - size)
 		y = random.randint(0, settings.HEIGHT - size)
 		self.type = EntityType.PLAYER
@@ -33,10 +34,13 @@ class Player(Entity):
 
 		move = self.speed * dt
 		self.old_rect = self.rect.copy()
-		self.rect.x += dx * move
-		self.rect.y += dy * move
-		
-		CollisionHandler.handle_collisions_maze(maze, self)
+
+		if dx != 0:
+			self.rect.x += dx * move
+		elif dy != 0:
+			self.rect.y += dy * move
+
+		CollisionHandler.handle_collisions_maze(self.ctx.maze, self)
 
 		if self.rect.topleft != self.old_rect.topleft:
 			self.set_dirty()

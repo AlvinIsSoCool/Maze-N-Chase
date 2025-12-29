@@ -1,7 +1,6 @@
 import pygame
 import settings
 
-from collisions import CollisionHandler
 from constants import EntityType
 
 class EntityManager:
