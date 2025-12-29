@@ -54,13 +54,14 @@ class GameContext:
 	def win_run(self):
 		self.game.set_state(GameState.GAME_WIN)
 
-	def restart_run(self):
+	def restart_run(self, full=True):
 		self.em.remove_all()
 		player = Player(self, color=self.theme.color("player"))
 		enemy = Enemy(self, color=self.theme.color("enemy"))
 
 		self.game.set_state(GameState.PLAYING, True)
-		self.maze.generate_and_draw_maze_dfs()
+		if full:
+			self.maze.generate_and_draw_maze_dfs()
 		self.em.add_all([player, enemy])
 
 	def force_all_dirty(self):
